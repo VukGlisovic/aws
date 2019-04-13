@@ -40,4 +40,42 @@ class S3(object):
         self.resource.meta.client.delete_bucket(Bucket=name)
 
     def list_buckets(self):
-        self.client.list_buckets()
+        """Lists the names of all buckets.
+
+        Returns:
+            list
+        """
+        response = self.resource.meta.client.list_buckets()
+        bucket_names = [b['Name'] for b in response['Buckets']]
+        return bucket_names
+
+    def upload_to_bucket_from_file(self, bucket_name, s3_path, filename):
+        """Upload a local file to an s3 bucket.
+
+        Args:
+            bucket_name (str): the bucket where to upload to
+            s3_path (str): path within the bucket to upload to
+            filename (str): local file path indicating the file to upload
+        """
+        bucket = self.resource.Bucket(name=bucket_name)
+        bucket.upload_file(Filename=filename, Key=s3_path)
+
+    def download_file(self, bucket_name, s3_path, filename):
+        """Downloads file from an s3 bucket.
+
+        Args:
+            bucket_name (str):
+            s3_path (str):
+            filename (str):
+        """
+        bucket = self.resource.Bucket(name=bucket_name)
+        bucket.download_file(Filename=filename, Key=s3_path)
+
+    def delete_object(self, bucket_name, s3_path):
+        """Deletes a file (object) from an s3 bucket.
+
+        Args:
+            bucket_name (str): bucket name
+            s3_path (str): file path to delete in the bucket
+        """
+        self.resource.Object(bucket_name, s3_path).delete()
