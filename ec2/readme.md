@@ -15,13 +15,13 @@ In short, the steps are:
 7. clean up
 
 
-### 1.&2. create your VPC and subnet
+### 1.&2. Create your VPC and subnet
 In the AWS console, go to `VPC` under `Services` (note in the top right
 the region you are in). Click `Launch VPC Wizard`. You can leave the
 defaults, but, fill in a name for the VPC and the public subnet.
 
 
-### 3. create security group and add rules
+### 3. Create security group and add rules
 To associate a security group with an instance, you specify the
 security group when you launch the instance. To create a security
 group, go to `VPC` under `Services` and click `Security Groups`.
@@ -36,7 +36,7 @@ access from any IPv4 address.
 to enable all ip addresses and open port 22.
 
 
-### 4. launch an instance
+### 4. Launch an instance
 Make sure you are still in the same region as where you create your
 VPC. Go to `EC2` under `Services`. Click `Launch Instance`. Follow
 the wizard and make sure you specify your VPC, your subnet and your
@@ -53,3 +53,28 @@ and then `Allocate`. Select the newly allocated ip address, choose
 `Actions` and then `Associate Address`. Here you can select the instance
 you launched in the previous step, to associate the elastic ip address
 with.
+
+
+### 6. Connect to your instance
+Use ssh to connect to your instance. You have to specify the path to the
+private key and the user_name@public_dns_name. For example, if you used
+Amazon Linux 2 or the Amazon Linux AMI, the user name is ec2-user.
+```bash
+ssh -i /path/my-key-pair.pem ec2-user@ec2-198-51-100-1.compute-1.amazonaws.com
+```
+Instead of using the public dns name, you could also use the elastic IP
+address directly (the public dns name resolves to the public IP address
+or the elastic IP address).
+
+If you stuble upon the following problem: `WARNING: UNPROTECTED PRIVATE
+KEY FILE!`,
+then you have to change permissions on the keyfile with `chmod 600` (no
+read and write access for non-root users).
+
+
+### 7. Clean up
+To prevent making additional costs, remove:
+* the EC2 instance
+* the VPC (automatically deletes subnets associated with it and
+security groups and more)
+* the elastic IP address
