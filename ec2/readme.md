@@ -1,5 +1,6 @@
 # EC2
 
+
 Here we will explain how to create an instance and how you can connect
 to the instance with ssh. The explanations are based on
 <a href="https://docs.aws.amazon.com/vpc/latest/userguide/getting-started-ipv4.html">Getting Started with IPv4 for Amazon VPC</a>.
