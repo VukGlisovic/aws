@@ -8,7 +8,7 @@ The steps below are more of a summary compared to the AWS tutorial.
 In short, the steps are:
 1. create a virtual private cloud (VPC)
 2. create public subnet within the VPC
-3. create security group for your instance
+3. create security group and add rules for your instance
 4. launch instance into the subnet
 5. associate Elastic Ip address to your instance
 6. connect to your instance
@@ -21,7 +21,7 @@ the region you are in). Click `Launch VPC Wizard`. You can leave the
 defaults, but, fill in a name for the VPC and the public subnet.
 
 
-### 3. create security group
+### 3. create security group and add rules
 To associate a security group with an instance, you specify the
 security group when you launch the instance. To create a security
 group, go to `VPC` under `Services` and click `Security Groups`.
@@ -43,3 +43,13 @@ the wizard and make sure you specify your VPC, your subnet and your
 security group. Finally, either create a new key pair or use an existing
 one to be able to connect to the instance later on.
 
+
+### 5. Associate elastic IP address to your instance
+In order to connect to the instance, our instance needs a public IPv4
+address to be able to communicate with the internet. Here you will
+allocate an elastic ip address to your account. Go to `VPC` under
+`Services` and navigate to `Elastic IPs`. Choose `Allocate new address`
+and then `Allocate`. Select the newly allocated ip address, choose
+`Actions` and then `Associate Address`. Here you can select the instance
+you launched in the previous step, to associate the elastic ip address
+with.
