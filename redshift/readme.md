@@ -1,14 +1,21 @@
 # Redshift
 
 
-Here we will cover how to connect to a cluster and how to populate the
-database with data.
+Here we'll briefly discuss the creation of a redshift cluster and 
+connecting to a redshift cluster.
 
-Steps:
-* create cluster
-    * select correct subnet
-    * make sure right inbound rights are present in the security group
-* connect to cluster
-    * have an account
-    * get odbc connection information (server, database, etc.)
-    * generate data
+When creating a redshift cluster, you need to have a subnet group. You
+can create one by navigating to `Amazon Redshift`, page `Security` and
+tab `Subnet Groups`. Here you can select a subnet in a VPC of your
+preference. Make sure the VPC can be publicly accessed and that there's
+a security group associated with the VPC, that has access to Redshift.
+
+In order to connect to a database you need:
+1. server name/host
+2. port
+3. username
+4. password
+
+In notebook `redshift/01-introduction-redshift-client.ipynb`, you can
+see how to connect to a redshift cluster, create data and query for
+that data.
